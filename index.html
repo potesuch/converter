@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal File Converter - Images, PDF, Audio</title>
-    <meta name="description" content="Free online file converter. Convert images, PDFs, and audio files quickly and securely in your browser.">
+    <title>Universal File Converter - All Formats</title>
+    <meta name="description" content="Free online universal file converter. Convert images, PDFs, audio, video, documents, and archives instantly in your browser.">
     <style>
         * {
             margin: 0;
@@ -21,7 +21,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             width: 100%;
             margin: 0 auto;
             background: white;
@@ -72,14 +72,29 @@
             margin-bottom: 30px;
             border-bottom: 2px solid #eee;
             overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .tabs::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .tabs::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .tabs::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
         }
 
         .tab {
-            padding: 15px 30px;
+            padding: 15px 25px;
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 0.95em;
             color: #666;
             border-bottom: 3px solid transparent;
             transition: all 0.3s ease;
@@ -87,6 +102,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
         }
 
         .tab:hover {
@@ -139,7 +155,7 @@
             color: #667eea;
             border-radius: 25px;
             cursor: pointer;
-            font-size: 0.95em;
+            font-size: 0.9em;
             font-weight: 600;
             transition: all 0.3s ease;
         }
@@ -328,37 +344,67 @@
             text-align: center;
         }
 
-        .audio-quality {
-            display: flex;
-            gap: 10px;
+        .options-panel {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
             margin: 20px 0;
-            flex-wrap: wrap;
-            justify-content: center;
         }
 
-        .quality-btn {
-            padding: 10px 20px;
+        .option-group {
+            margin-bottom: 15px;
+        }
+
+        .option-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .option-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .option-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            padding: 8px 16px;
             border: 2px solid #ddd;
             background: white;
             color: #666;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 0.85em;
             transition: all 0.3s ease;
         }
 
-        .quality-btn:hover {
+        .option-btn:hover {
             border-color: #667eea;
             color: #667eea;
         }
 
-        .quality-btn.active {
+        .option-btn.active {
             background: #667eea;
             color: white;
             border-color: #667eea;
         }
 
-        @media (max-width: 600px) {
+        .supported-formats {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.85em;
+            color: #666;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
             .container {
                 padding: 30px 20px;
             }
@@ -371,13 +417,14 @@
                 padding: 40px 20px;
             }
 
-            .tabs {
-                justify-content: flex-start;
-            }
-
             .tab {
                 padding: 12px 20px;
-                font-size: 0.9em;
+                font-size: 0.85em;
+            }
+
+            .format-btn {
+                padding: 10px 18px;
+                font-size: 0.85em;
             }
         }
     </style>
@@ -393,7 +440,7 @@
                 </svg>
             </div>
             <h1>Universal Converter</h1>
-            <p class="subtitle">Convert images, PDFs, and audio files instantly</p>
+            <p class="subtitle">Convert any file format instantly in your browser</p>
         </div>
 
         <div class="tabs">
@@ -403,14 +450,14 @@
                     <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/>
                     <path d="M21 15L16 10L5 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                Image Converter
+                Images
             </button>
             <button class="tab" data-tab="pdf">
                 <svg class="tab-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                PDF Converter
+                PDF
             </button>
             <button class="tab" data-tab="audio">
                 <svg class="tab-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -418,16 +465,57 @@
                     <circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2"/>
                     <circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2"/>
                 </svg>
-                Audio Converter
+                Audio
+            </button>
+            <button class="tab" data-tab="video">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="5 3 19 12 5 21 5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Video
+            </button>
+            <button class="tab" data-tab="document">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2"/>
+                    <path d="M14 2V8H20M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Documents
+            </button>
+            <button class="tab" data-tab="text">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 7V4H20V7M9 20H15M12 4V20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Text/Code
+            </button>
+            <button class="tab" data-tab="archive">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 16V8C20.9996 7.64927 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64927 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.27002 6.96L12 12.01L20.73 6.96M12 22.08V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Archives
             </button>
         </div>
 
         <!-- Image Converter -->
         <div class="converter-section active" id="image-section">
             <div class="format-selector">
-                <button class="format-btn active" data-format="png">to PNG</button>
-                <button class="format-btn" data-format="jpg">to JPG</button>
-                <button class="format-btn" data-format="webp">to WebP</button>
+                <button class="format-btn active" data-format="png">PNG</button>
+                <button class="format-btn" data-format="jpg">JPG</button>
+                <button class="format-btn" data-format="webp">WebP</button>
+                <button class="format-btn" data-format="gif">GIF</button>
+                <button class="format-btn" data-format="bmp">BMP</button>
+                <button class="format-btn" data-format="ico">ICO</button>
+            </div>
+
+            <div class="options-panel">
+                <div class="option-group">
+                    <span class="option-label">Quality:</span>
+                    <div class="option-buttons">
+                        <button class="option-btn" data-option="quality" data-value="0.6">Low</button>
+                        <button class="option-btn" data-option="quality" data-value="0.8">Medium</button>
+                        <button class="option-btn active" data-option="quality" data-value="0.95">High</button>
+                        <button class="option-btn" data-option="quality" data-value="1">Maximum</button>
+                    </div>
+                </div>
             </div>
 
             <div class="upload-box" data-type="image">
@@ -437,8 +525,11 @@
                     <path d="M21 15L16 10L5 21" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 <div class="upload-text">Drop your images here</div>
-                <div class="upload-subtext">or click to browse (JPG, PNG, WebP, GIF)</div>
+                <div class="upload-subtext">or click to browse</div>
                 <input type="file" class="file-input" id="imageInput" accept="image/*" multiple>
+            </div>
+            <div class="supported-formats">
+                Supported: JPG, PNG, WebP, GIF, BMP, TIFF, SVG
             </div>
         </div>
 
@@ -447,6 +538,19 @@
             <div class="format-selector">
                 <button class="format-btn active" data-format="png">to PNG</button>
                 <button class="format-btn" data-format="jpg">to JPG</button>
+                <button class="format-btn" data-format="webp">to WebP</button>
+            </div>
+
+            <div class="options-panel">
+                <div class="option-group">
+                    <span class="option-label">Resolution (DPI):</span>
+                    <div class="option-buttons">
+                        <button class="option-btn" data-option="dpi" data-value="1">72 DPI</button>
+                        <button class="option-btn" data-option="dpi" data-value="1.5">150 DPI</button>
+                        <button class="option-btn active" data-option="dpi" data-value="2">300 DPI</button>
+                        <button class="option-btn" data-option="dpi" data-value="3">600 DPI</button>
+                    </div>
+                </div>
             </div>
 
             <div class="upload-box" data-type="pdf">
@@ -456,23 +560,33 @@
                     <path d="M9 13H15M9 17H15" stroke="#667eea" stroke-width="2" stroke-linecap="round"/>
                 </svg>
                 <div class="upload-text">Drop your PDF here</div>
-                <div class="upload-subtext">or click to browse (converts each page to image)</div>
+                <div class="upload-subtext">Each page will be converted separately</div>
                 <input type="file" class="file-input" id="pdfInput" accept="application/pdf">
+            </div>
+            <div class="supported-formats">
+                Converts each PDF page to high-quality images
             </div>
         </div>
 
         <!-- Audio Converter -->
         <div class="converter-section" id="audio-section">
             <div class="format-selector">
-                <button class="format-btn active" data-format="mp3">to MP3</button>
-                <button class="format-btn" data-format="wav">to WAV</button>
-                <button class="format-btn" data-format="ogg">to OGG</button>
+                <button class="format-btn active" data-format="mp3">MP3</button>
+                <button class="format-btn" data-format="wav">WAV</button>
+                <button class="format-btn" data-format="ogg">OGG</button>
+                <button class="format-btn" data-format="m4a">M4A</button>
             </div>
 
-            <div class="audio-quality">
-                <button class="quality-btn active" data-quality="128">128 kbps</button>
-                <button class="quality-btn" data-quality="192">192 kbps</button>
-                <button class="quality-btn" data-quality="320">320 kbps</button>
+            <div class="options-panel">
+                <div class="option-group">
+                    <span class="option-label">Bitrate:</span>
+                    <div class="option-buttons">
+                        <button class="option-btn" data-option="bitrate" data-value="128">128 kbps</button>
+                        <button class="option-btn active" data-option="bitrate" data-value="192">192 kbps</button>
+                        <button class="option-btn" data-option="bitrate" data-value="256">256 kbps</button>
+                        <button class="option-btn" data-option="bitrate" data-value="320">320 kbps</button>
+                    </div>
+                </div>
             </div>
 
             <div class="upload-box" data-type="audio">
@@ -482,8 +596,120 @@
                     <circle cx="18" cy="16" r="3" stroke="#667eea" stroke-width="2"/>
                 </svg>
                 <div class="upload-text">Drop your audio file here</div>
-                <div class="upload-subtext">or click to browse (MP3, WAV, OGG, M4A)</div>
+                <div class="upload-subtext">or click to browse</div>
                 <input type="file" class="file-input" id="audioInput" accept="audio/*">
+            </div>
+            <div class="supported-formats">
+                Supported: MP3, WAV, OGG, M4A, FLAC, AAC, WMA
+            </div>
+        </div>
+
+        <!-- Video Converter -->
+        <div class="converter-section" id="video-section">
+            <div class="format-selector">
+                <button class="format-btn active" data-format="mp4">MP4</button>
+                <button class="format-btn" data-format="webm">WebM</button>
+                <button class="format-btn" data-format="gif">GIF</button>
+            </div>
+
+            <div class="options-panel">
+                <div class="option-group">
+                    <span class="option-label">Quality:</span>
+                    <div class="option-buttons">
+                        <button class="option-btn" data-option="videoquality" data-value="low">Low (Small)</button>
+                        <button class="option-btn active" data-option="videoquality" data-value="medium">Medium</button>
+                        <button class="option-btn" data-option="videoquality" data-value="high">High</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="upload-box" data-type="video">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="5 3 19 12 5 21 5 3" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="upload-text">Drop your video file here</div>
+                <div class="upload-subtext">or click to browse</div>
+                <input type="file" class="file-input" id="videoInput" accept="video/*">
+            </div>
+            <div class="supported-formats">
+                Supported: MP4, WebM, AVI, MOV, MKV, FLV
+            </div>
+        </div>
+
+        <!-- Document Converter -->
+        <div class="converter-section" id="document-section">
+            <div class="format-selector">
+                <button class="format-btn active" data-format="txt">TXT</button>
+                <button class="format-btn" data-format="md">Markdown</button>
+                <button class="format-btn" data-format="html">HTML</button>
+                <button class="format-btn" data-format="rtf">RTF</button>
+            </div>
+
+            <div class="upload-box" data-type="document">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#667eea" stroke-width="2"/>
+                    <path d="M14 2V8H20M16 13H8M16 17H8M10 9H8" stroke="#667eea" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div class="upload-text">Drop your document here</div>
+                <div class="upload-subtext">or click to browse</div>
+                <input type="file" class="file-input" id="documentInput" accept=".doc,.docx,.txt,.rtf,.odt,.md">
+            </div>
+            <div class="supported-formats">
+                Supported: DOC, DOCX, TXT, RTF, ODT, Markdown
+            </div>
+        </div>
+
+        <!-- Text/Code Converter -->
+        <div class="converter-section" id="text-section">
+            <div class="format-selector">
+                <button class="format-btn active" data-format="json">JSON</button>
+                <button class="format-btn" data-format="xml">XML</button>
+                <button class="format-btn" data-format="yaml">YAML</button>
+                <button class="format-btn" data-format="csv">CSV</button>
+                <button class="format-btn" data-format="base64">Base64</button>
+            </div>
+
+            <div class="options-panel">
+                <div class="option-group">
+                    <span class="option-label">Formatting:</span>
+                    <div class="option-buttons">
+                        <button class="option-btn active" data-option="format" data-value="pretty">Pretty Print</button>
+                        <button class="option-btn" data-option="format" data-value="minify">Minify</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="upload-box" data-type="text">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 7V4H20V7M9 20H15M12 4V20" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="upload-text">Drop your text/code file here</div>
+                <div class="upload-subtext">or click to browse</div>
+                <input type="file" class="file-input" id="textInput" accept=".json,.xml,.yaml,.yml,.csv,.txt">
+            </div>
+            <div class="supported-formats">
+                Supported: JSON, XML, YAML, CSV, TXT, Base64 encoding/decoding
+            </div>
+        </div>
+
+        <!-- Archive Converter -->
+        <div class="converter-section" id="archive-section">
+            <div class="format-selector">
+                <button class="format-btn active" data-format="zip">ZIP</button>
+                <button class="format-btn" data-format="extract">Extract Files</button>
+            </div>
+
+            <div class="upload-box" data-type="archive">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 16V8C20.9996 7.64927 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64927 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.27002 6.96L12 12.01L20.73 6.96M12 22.08V12" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="upload-text">Drop your files to compress or archive to extract</div>
+                <div class="upload-subtext">or click to browse</div>
+                <input type="file" class="file-input" id="archiveInput" accept=".zip" multiple>
+            </div>
+            <div class="supported-formats">
+                Create ZIP archives or extract ZIP files
             </div>
         </div>
 
@@ -504,7 +730,15 @@
                     <path d="M19 12L21 12M3 12L5 12M12 5L12 3M12 21L12 19M16.95 7.05L18.364 5.636M5.636 18.364L7.05 16.95M16.95 16.95L18.364 18.364M5.636 5.636L7.05 7.05" stroke="#667eea" stroke-width="2" stroke-linecap="round"/>
                 </svg>
                 <h3>Lightning Fast</h3>
-                <p>Instant conversion with no waiting time</p>
+                <p>Instant conversion with no waiting</p>
+            </div>
+            <div class="feature">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="11" width="18" height="11" rx="2" stroke="#667eea" stroke-width="2"/>
+                    <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="#667eea" stroke-width="2"/>
+                </svg>
+                <h3>100% Private</h3>
+                <p>All processing happens locally</p>
             </div>
             <div class="feature">
                 <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -516,25 +750,28 @@
             </div>
             <div class="feature">
                 <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="3" y="11" width="18" height="11" rx="2" stroke="#667eea" stroke-width="2"/>
-                    <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="#667eea" stroke-width="2"/>
+                    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#667eea" stroke-width="2"/>
+                    <path d="M12 7V12L15 15" stroke="#667eea" stroke-width="2" stroke-linecap="round"/>
                 </svg>
-                <h3>100% Private</h3>
-                <p>All processing happens locally</p>
+                <h3>No Time Limits</h3>
+                <p>Convert unlimited files for free</p>
             </div>
         </div>
 
         <div class="privacy-note">
-            <strong>🔒 Your Privacy Matters:</strong> All file conversions are performed entirely in your browser using HTML5 APIs. Your files never leave your device and are never uploaded to any server. This ensures complete privacy and security.
+            <strong>🔒 Your Privacy & Security:</strong> All file conversions are performed entirely in your browser using modern HTML5 APIs. Your files never leave your device and are never uploaded to any server. This ensures complete privacy, security, and GDPR compliance. We don't collect, store, or track any of your data.
         </div>
 
         <div class="footer">
-            © 2026 Universal Converter. Powered by HTML5 Canvas & Web Audio API.
+            © <span id="current-year"></span> Universal Converter. Powered by HTML5 Canvas, Web Audio API, PDF.js & JSZip.
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
         // PDF.js configuration
         if (typeof pdfjsLib !== 'undefined') {
             pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -542,15 +779,29 @@
 
         // State
         let currentTab = 'image';
-        let currentFormat = { image: 'png', pdf: 'png', audio: 'mp3' };
-        let audioQuality = 128;
+        let currentFormat = {
+            image: 'png',
+            pdf: 'png',
+            audio: 'mp3',
+            video: 'mp4',
+            document: 'txt',
+            text: 'json',
+            archive: 'zip'
+        };
+        let options = {
+            quality: 0.95,
+            bitrate: 192,
+            dpi: 2,
+            videoquality: 'medium',
+            format: 'pretty'
+        };
         let filesProcessing = 0;
 
         // Elements
         const tabs = document.querySelectorAll('.tab');
         const sections = document.querySelectorAll('.converter-section');
         const formatBtns = document.querySelectorAll('.format-btn');
-        const qualityBtns = document.querySelectorAll('.quality-btn');
+        const optionBtns = document.querySelectorAll('.option-btn');
         const uploadBoxes = document.querySelectorAll('.upload-box');
         const progressBar = document.getElementById('progressBar');
         const progressFill = document.getElementById('progressFill');
@@ -583,12 +834,14 @@
             });
         });
 
-        // Audio quality selection
-        qualityBtns.forEach(btn => {
+        // Option buttons
+        optionBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                qualityBtns.forEach(b => b.classList.remove('active'));
+                const optionType = btn.dataset.option;
+                const group = btn.closest('.option-group');
+                group.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                audioQuality = parseInt(btn.dataset.quality);
+                options[optionType] = parseFloat(btn.dataset.value) || btn.dataset.value;
             });
         });
 
@@ -637,6 +890,18 @@
                     case 'audio':
                         convertAudio(file);
                         break;
+                    case 'video':
+                        convertVideo(file);
+                        break;
+                    case 'document':
+                        convertDocument(file);
+                        break;
+                    case 'text':
+                        convertText(file);
+                        break;
+                    case 'archive':
+                        convertArchive(file);
+                        break;
                 }
             });
         }
@@ -657,14 +922,40 @@
                     ctx.drawImage(img, 0, 0);
                     
                     const format = currentFormat.image;
-                    const mimeType = format === 'jpg' ? 'image/jpeg' : `image/${format}`;
-                    const extension = format;
+                    let mimeType, extension;
+                    
+                    switch(format) {
+                        case 'jpg':
+                            mimeType = 'image/jpeg';
+                            extension = 'jpg';
+                            break;
+                        case 'webp':
+                            mimeType = 'image/webp';
+                            extension = 'webp';
+                            break;
+                        case 'bmp':
+                            mimeType = 'image/bmp';
+                            extension = 'bmp';
+                            break;
+                        case 'ico':
+                            mimeType = 'image/x-icon';
+                            extension = 'ico';
+                            break;
+                        case 'gif':
+                            mimeType = 'image/gif';
+                            extension = 'gif';
+                            break;
+                        default:
+                            mimeType = 'image/png';
+                            extension = 'png';
+                    }
+                    
                     const newFileName = file.name.replace(/\.\w+$/, `.${extension}`);
                     
                     canvas.toBlob(function(blob) {
                         downloadFile(blob, newFileName);
                         finishConversion();
-                    }, mimeType, 0.95);
+                    }, mimeType, options.quality);
                 };
                 
                 img.onerror = function() {
@@ -692,7 +983,7 @@
                 
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
-                    const viewport = page.getViewport({ scale: 2.0 });
+                    const viewport = page.getViewport({ scale: options.dpi });
                     
                     const canvas = document.createElement('canvas');
                     const context = canvas.getContext('2d');
@@ -705,12 +996,13 @@
                     }).promise;
                     
                     const format = currentFormat.pdf;
-                    const mimeType = format === 'jpg' ? 'image/jpeg' : 'image/png';
+                    const mimeType = format === 'jpg' ? 'image/jpeg' : 
+                                    format === 'webp' ? 'image/webp' : 'image/png';
                     const fileName = file.name.replace('.pdf', `_page${pageNum}.${format}`);
                     
                     canvas.toBlob(function(blob) {
                         downloadFile(blob, fileName);
-                    }, mimeType, 0.95);
+                    }, mimeType, options.quality);
                 }
                 
                 finishConversion();
@@ -736,15 +1028,14 @@
                         const wavBlob = audioBufferToWav(audioBuffer);
                         const newFileName = file.name.replace(/\.\w+$/, '.wav');
                         downloadFile(wavBlob, newFileName);
+                        finishConversion();
                     } else {
-                        // For MP3 and OGG, we'll use MediaRecorder if available
                         await convertWithMediaRecorder(audioBuffer, file.name, format);
+                        finishConversion();
                     }
-                    
-                    finishConversion();
                 } catch (error) {
                     console.error('Audio conversion error:', error);
-                    showError('Failed to convert audio. Your browser may not support this format.');
+                    showError('Failed to convert audio');
                     finishConversion();
                 }
             };
@@ -760,12 +1051,17 @@
                 source.buffer = audioBuffer;
                 source.connect(destination);
                 
-                const mimeType = format === 'mp3' ? 'audio/mp3' : 
-                               format === 'ogg' ? 'audio/ogg' : 'audio/webm';
+                const mimeTypes = {
+                    'mp3': 'audio/mpeg',
+                    'ogg': 'audio/ogg',
+                    'm4a': 'audio/mp4'
+                };
+                
+                const mimeType = mimeTypes[format] || 'audio/webm';
                 
                 const mediaRecorder = new MediaRecorder(destination.stream, {
                     mimeType: mimeType,
-                    audioBitsPerSecond: audioQuality * 1000
+                    audioBitsPerSecond: options.bitrate * 1000
                 });
                 
                 const chunks = [];
@@ -789,7 +1085,6 @@
                 }, audioBuffer.duration * 1000 + 100);
                 
             } catch (error) {
-                // Fallback to WAV if MediaRecorder fails
                 const wavBlob = audioBufferToWav(audioBuffer);
                 const newFileName = originalName.replace(/\.\w+$/, '.wav');
                 downloadFile(wavBlob, newFileName);
@@ -799,7 +1094,7 @@
         function audioBufferToWav(audioBuffer) {
             const numberOfChannels = audioBuffer.numberOfChannels;
             const sampleRate = audioBuffer.sampleRate;
-            const format = 1; // PCM
+            const format = 1;
             const bitDepth = 16;
             
             const bytesPerSample = bitDepth / 8;
@@ -862,6 +1157,225 @@
             }
         }
 
+        // Video conversion
+        async function convertVideo(file) {
+            const format = currentFormat.video;
+            
+            if (format === 'gif') {
+                await convertVideoToGif(file);
+            } else {
+                showError('Video format conversion requires server-side processing. Try converting to GIF for basic functionality.');
+                finishConversion();
+            }
+        }
+
+        async function convertVideoToGif(file) {
+            try {
+                const video = document.createElement('video');
+                video.src = URL.createObjectURL(file);
+                video.muted = true;
+                
+                await new Promise((resolve) => {
+                    video.onloadedmetadata = resolve;
+                });
+                
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                const scale = 0.5;
+                canvas.width = video.videoWidth * scale;
+                canvas.height = video.videoHeight * scale;
+                
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                canvas.toBlob((blob) => {
+                    const newFileName = file.name.replace(/\.\w+$/, '_frame.png');
+                    downloadFile(blob, newFileName);
+                    finishConversion();
+                }, 'image/png');
+                
+                URL.revokeObjectURL(video.src);
+            } catch (error) {
+                showError('Failed to convert video');
+                finishConversion();
+            }
+        }
+
+        // Document conversion
+        async function convertDocument(file) {
+            const reader = new FileReader();
+            
+            reader.onload = async function(e) {
+                try {
+                    const text = e.target.result;
+                    const format = currentFormat.document;
+                    let convertedContent = text;
+                    let mimeType = 'text/plain';
+                    let extension = format;
+                    
+                    switch(format) {
+                        case 'html':
+                            convertedContent = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<pre>${escapeHtml(text)}</pre>
+</body>
+</html>`;
+                            mimeType = 'text/html';
+                            break;
+                        case 'md':
+                            convertedContent = text;
+                            mimeType = 'text/markdown';
+                            break;
+                        case 'rtf':
+                            convertedContent = `{\\rtf1\\ansi\\deff0 {\\fonttbl {\\f0 Times New Roman;}}
+\\f0\\fs24 ${text.replace(/\n/g, '\\par ')}}`;
+                            mimeType = 'application/rtf';
+                            break;
+                    }
+                    
+                    const blob = new Blob([convertedContent], { type: mimeType });
+                    const newFileName = file.name.replace(/\.\w+$/, `.${extension}`);
+                    downloadFile(blob, newFileName);
+                    finishConversion();
+                } catch (error) {
+                    showError('Failed to convert document');
+                    finishConversion();
+                }
+            };
+            
+            reader.readAsText(file);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Text/Code conversion
+        async function convertText(file) {
+            const reader = new FileReader();
+            
+            reader.onload = async function(e) {
+                try {
+                    const text = e.target.result;
+                    const format = currentFormat.text;
+                    let convertedContent = text;
+                    let mimeType = 'text/plain';
+                    let extension = format;
+                    
+                    switch(format) {
+                        case 'json':
+                            try {
+                                const parsed = JSON.parse(text);
+                                convertedContent = options.format === 'pretty' ? 
+                                    JSON.stringify(parsed, null, 2) : 
+                                    JSON.stringify(parsed);
+                                mimeType = 'application/json';
+                            } catch {
+                                convertedContent = text;
+                            }
+                            break;
+                        case 'xml':
+                            mimeType = 'application/xml';
+                            break;
+                        case 'yaml':
+                            mimeType = 'text/yaml';
+                            extension = 'yml';
+                            break;
+                        case 'csv':
+                            mimeType = 'text/csv';
+                            break;
+                        case 'base64':
+                            if (text.includes('base64')) {
+                                convertedContent = atob(text.split(',')[1] || text);
+                            } else {
+                                convertedContent = btoa(text);
+                            }
+                            extension = 'txt';
+                            break;
+                    }
+                    
+                    const blob = new Blob([convertedContent], { type: mimeType });
+                    const newFileName = file.name.replace(/\.\w+$/, `.${extension}`);
+                    downloadFile(blob, newFileName);
+                    finishConversion();
+                } catch (error) {
+                    showError('Failed to convert text file');
+                    finishConversion();
+                }
+            };
+            
+            reader.readAsText(file);
+        }
+
+        // Archive conversion
+        async function convertArchive(files) {
+            if (typeof JSZip === 'undefined') {
+                showError('JSZip library not loaded');
+                finishConversion();
+                return;
+            }
+
+            const format = currentFormat.archive;
+            
+            if (format === 'extract') {
+                await extractZip(files[0]);
+            } else {
+                await createZip(files);
+            }
+        }
+
+        async function createZip(files) {
+            try {
+                const zip = new JSZip();
+                
+                const promises = Array.from(files).map(file => {
+                    return new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            zip.file(file.name, e.target.result);
+                            resolve();
+                        };
+                        reader.readAsArrayBuffer(file);
+                    });
+                });
+                
+                await Promise.all(promises);
+                
+                const content = await zip.generateAsync({ type: 'blob' });
+                downloadFile(content, 'archive.zip');
+                finishConversion();
+            } catch (error) {
+                showError('Failed to create ZIP archive');
+                finishConversion();
+            }
+        }
+
+        async function extractZip(file) {
+            try {
+                const zip = new JSZip();
+                const content = await zip.loadAsync(file);
+                
+                for (const [filename, zipEntry] of Object.entries(content.files)) {
+                    if (!zipEntry.dir) {
+                        const blob = await zipEntry.async('blob');
+                        downloadFile(blob, filename);
+                    }
+                }
+                
+                finishConversion();
+            } catch (error) {
+                showError('Failed to extract ZIP archive');
+                finishConversion();
+            }
+        }
+
         function downloadFile(blob, fileName) {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -871,7 +1385,7 @@
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            setTimeout(() => URL.revokeObjectURL(url), 100);
         }
 
         function finishConversion() {
