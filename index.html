@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JPG to PNG Converter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Free online JPG to PNG converter. Fast, private, works directly in your browser.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<div class="container">
+  <header>
+    <div class="logo">🖼️</div>
+    <h1>JPG → PNG</h1>
+    <p class="subtitle">
+      Convert JPG images to PNG instantly.<br>
+      No uploads. Everything happens in your browser.
+    </p>
+  </header>
+
+  <form class="box">
+    <input type="file" class="box_file" accept="image/jpeg" multiple>
+    <div class="drop-area">
+      <p><strong>Drop JPG files here</strong></p>
+      <span>or click to choose files</span>
+    </div>
+
+    <div class="status uploading">Converting…</div>
+    <div class="status success">Done! Files downloaded.</div>
+  </form>
+
+  <footer>
+    <p>🔒 Privacy first — images never leave your device</p>
+    <small>© 2026 JPG to PNG Converter</small>
+  </footer>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
