@@ -11,32 +11,88 @@
 </head>
 <body>
 
-<div class="background"></div>
-
-<div class="container">
   <header>
-    <div class="logo">🖼️</div>
-    <h1>JPG → PNG</h1>
-    <p class="subtitle">
-      Convert JPG images to PNG instantly.<br>
-      No uploads. Everything happens in your browser.
-    </p>
+    <div class="header-inner">
+      <div class="logo">CF</div>
+      <strong>Online File Converter</strong>
+    </div>
   </header>
 
-  <form class="box">
-    <input type="file" class="box_file" accept="image/jpeg" multiple>
-    <div class="drop-area">
-      <p><strong>Drop JPG files here</strong></p>
-      <span>or click to choose files</span>
+  <div class="container">
+    <div class="card">
+
+      <div class="tabs">
+        <div class="tab active" data-type="image">Images</div>
+        <div class="tab" data-type="pdf">PDF</div>
+        <div class="tab" data-type="audio">Audio</div>
+      </div>
+      
+    <div class="tab-description" id="tabDesc">
+      Convert JPG, PNG and WEBP images to high‑quality PNG files.
     </div>
 
-    <div class="status uploading">Converting…</div>
-    <div class="status success">Done! Files downloaded.</div>
-  </form>
+      <input type="file" id="fileInput" multiple>
+
+      <div class="drop" id="drop">
+        <strong>Select files</strong>
+        <span>or drag and drop here</span>
+      </div>
+
+      <div class="progress" id="progress">
+        <div class="progress-bar" id="bar"></div>
+      </div>
+
+      <div class="status" id="status">Ready</div>
+
+    </div>
+    
+    <section class="info-block">
+      <h2>Convert files securely in your browser</h2>
+
+      <p>
+        Online File Converter is a fast and privacy‑focused tool that allows you to convert
+        images, PDF documents and audio files directly in your browser.
+        No uploads, no accounts and no server‑side processing.
+      </p>
+
+      <p>
+        All file conversions are performed locally using modern browser APIs.
+        Your files never leave your device and are never transmitted over the network.
+      </p>
+
+      <ul>
+        <li>✔ Image conversion using HTML5 Canvas</li>
+        <li>✔ PDF rendering powered by modern PDF engines</li>
+        <li>✔ Audio processing via Web Audio API</li>
+        <li>✔ No file size limits</li>
+        <li>✔ No registration required</li>
+      </ul>
+    </section>
+  </div>
+  
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+
+    <h4>Are my files uploaded to a server?</h4>
+    <p>No. All processing happens locally in your browser. Files are never uploaded.</p>
+
+    <h4>Is there a file size limit?</h4>
+    <p>No hard limits. Performance depends only on your device.</p>
+
+    <h4>Which browsers are supported?</h4>
+    <p>Chrome, Firefox, Edge and modern Chromium‑based browsers.</p>
+
+    <h4>Is this service free?</h4>
+    <p>Yes. The converter is completely free to use.</p>
+  </section>
 
   <footer>
-    <p>🔒 Privacy first — images never leave your device</p>
-    <small>© 2026 JPG to PNG Converter</small>
+    <p>
+      © 2026 Online File Converter · Privacy‑first tools for the modern web
+    </p>
+    <p>
+      No tracking · No uploads · Client‑side processing
+    </p>
   </footer>
 </div>
 
